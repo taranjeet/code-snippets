@@ -1,0 +1,171 @@
+## Django views
+
+
+#### Override get and post method in ListView
+
+Generally used when some custom object(from other database like elasticsearch) needs
+to be displayed in a list form which can be paginated.
+
+```
+from django.shortcuts import render
+from django.views.generic import ListView
+
+
+class BookListView(ListView):
+
+    form_class = BookForm
+    template_name = 'book/list.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(request.GET or None)
+        if form.is_valid():
+            # do some custom action here
+        return render(request, self.template_name, {
+            'form': form
+        })
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST or None)
+        if form.is_valid():
+            # do some custom action here
+        return render(request, self.template_name, {
+            'form': form,
+        })
+```
+
+#### Override get with pagination in ListView
+
+
+```
+from django.shortcuts import render
+from django.views.generic import ListView
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
+
+class BookListView(ListView):
+
+    form_class = BookForm
+    template_name = 'book/list.html'
+    paginate_by = 5
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(request.GET or None)
+        books = Book.objects.filter(is_published=True)
+        page = request.GET.get('page')
+        paginator = Paginator(books, self.paginate_by)
+        try:
+            books = paginator.page(page)
+        except PageNotAnInteger:
+            books = paginator.page(1)
+        except EmptyPage:
+            books = paginator.page(paginator.num_pages)
+        return render(request, self.template_name, {
+            'form': form,
+            'books': books
+        })
+```
+
+#### Override dispatch in Class based View
+
+`dispatch` function in any Class based View can be overriden to check for any custom permission or if the user is logged in or not.
+
+```
+from django.shortcuts import render
+from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+
+class BookListView(ListView):
+
+    form_class = BookForm
+    template_name = 'book/list.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        if not self.request.user.has_perm('base.CAN_ACCESS_BOOK_LIST'):
+            raise Http404
+        return super(BookListView, self).dispatch(*args, **kwargs)
+```
+
+#### Pass initial data in forms
+
+```
+from django.shortcuts import render
+from django.views.generic import ListView
+
+
+class BookListView(ListView):
+
+    form_class = BookForm
+    template_name = 'book/list.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial={
+            'name': 'Introduction to Python'
+            }
+        )
+        if form.is_valid():
+            # do some custom action here
+        return render(request, self.template_name, {
+            'form': form
+        })
+```
+
+#### View which functions on both ajax and normal request
+
+Many a times, it is required to render the template at get request and then render a particular json object when an ajax request is made at the same route.
+
+```
+from django.shortcuts import render
+from django.views.generic import ListView
+from django.http import JsonResponse
+
+
+class BookListView(ListView):
+
+    form_class = BookForm
+    template_name = 'book/list.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial={
+            'name': 'Introduction to Python'
+            }
+        )
+        output = {}
+        if form.is_valid():
+            # add some data in output here(if required)
+            output['heading'] = 'form valid'
+
+        if not request.is_ajax():
+            output['form'] = form_obj
+            return render(request, self.template_name, output)
+        else:
+            return JsonResponse(output)
+```
+
+#### Message framework use in views
+
+```
+from django.shortcuts import render
+from django.views.generic import ListView
+
+
+class BookListView(ListView):
+
+    form_class = BookForm
+    template_name = 'book/list.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(request.GET or None)
+        if form.is_valid():
+            # do some custom action here
+            messages.add_message(request, messages.INFO, 'Form is valid')
+            # save some db object
+            messages.add_message(request, messages.SUCCESS, 'Object save is successful')
+        else:
+            messages.add_message(request, messages.ERROR, 'Form is not valid')
+        return render(request, self.template_name, {
+            'form': form
+        })
+```
