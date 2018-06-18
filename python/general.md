@@ -1,4 +1,4 @@
-## Django templates
+## Python General Code
 
 
 #### Remove html tags from string
