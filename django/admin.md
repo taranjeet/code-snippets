@@ -1,0 +1,44 @@
+## Django admin
+
+
+#### Create a custom admin action
+
+```
+from django.contrib import admin, messages
+
+from .models import Book
+
+
+@admin.register(Book)
+class BookAdmin(admin.ModelAdmin):
+
+    def mark_book_as_published(modelAdmin, request, queryset):
+        if queryset.count() == 0:
+            return messages.error(request, 'Select atleast one entry')
+        queryset.update(is_published=True)
+    mark_book_as_publishe.short_description = 'Mark Book as published'
+
+    actions = [mark_book_as_published, ]
+
+```
+
+#### Write a custom field for display in Django admin
+
+```
+from django.contrib import admin, messages
+
+from .models import Book
+
+
+@admin.register(Book)
+class BookAdmin(admin.ModelAdmin):
+
+    list_display = ('id', 'name', 'formatted_image', )
+
+    def formatted_image(self, obj):
+        if obj.image:
+            return mark_safe('<img src="{}" width="250" height="250"/>'.format(obj.image))
+        return ''
+    formatted_image.short_description = 'Image'
+```
+
