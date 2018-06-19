@@ -40,3 +40,42 @@ class Command(BaseCommand):
 
         # do some processing here now
 ```
+
+#### Write a custom context processor
+
+```
+
+def get_some_custom_value(request):
+    return {
+        'some_custom_key': 'some_custom_value'
+    }
+
+# Include the following in CONTEXT_PROCESSOR in settings
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [ join(APP_DIR, 'templates'), ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                ...
+                'path.to.get_some_custom_value',
+            ]
+        },
+    },
+]
+
+```
+
+#### Cache operations
+
+```
+from django.core import cache
+
+# set mykey: myvalue
+cache.set('mykey', 'myvalue')
+# get value
+cache.get('mykey')
+# delete value
+cache.delete('mykey')
+```
