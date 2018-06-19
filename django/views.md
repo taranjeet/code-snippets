@@ -169,3 +169,14 @@ class BookListView(ListView):
             'form': form
         })
 ```
+
+#### Apply login_required decorator and permission check on FBV
+
+```
+from django.contrib.auth.decorators import login_required, permission_required
+
+@login_required
+@permission_required('myapp.MY_PERMISSION', raise_exception=True)
+def my_view(request):
+    return HttpResponse('<h1>Hello</h1>')
+```
