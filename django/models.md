@@ -58,3 +58,14 @@ class Author(models.Model):
     def get_full_name(self):
         return '{} {}'.format(self.first_name, self.last_name)
 ```
+
+#### Use transaction.atomic to save model instance
+
+```
+from django.db import transaction
+
+
+with transaction.atomic():
+    book = Book(name='Introduction to Python')
+    book.save()
+```
