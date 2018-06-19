@@ -41,3 +41,39 @@ Uses django-widget-tweak to add bootstrap(v4) classes.
 </div>
 {% endfor %}
 ```
+
+#### Write a template tag
+
+```
+# in any app, create the following structure
+
+├── templatetags
+│   ├── __init__.py
+│   └── app_extras.py
+```
+
+```
+# app_extras.py
+
+from django import template
+
+register = template.Library()
+
+# to lookup any value from dict object in template
+@register.filter(name='lookup')
+def cut(dict_obj, key):
+    if isinstance(dict_obj, dict):
+        return dict_obj.get(key, {})
+    else:
+        return dict_obj
+
+```
+
+```
+# app_template.html
+
+{% load app_extras %}
+
+{{my_dict_object|lookup:"custom_key"}}
+
+```
