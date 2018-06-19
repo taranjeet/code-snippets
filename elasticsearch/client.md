@@ -21,7 +21,22 @@ response = scan(es, query=query, size=100, index=INDEX_NAME, doc_type=TYPE_NAME)
 for doc in response:
     parsed_doc = json.loads(json.dumps(doc))
     print parsed_doc.get('_id')
+```
 
+#### Compute shingled value of string for Completion Suggester
+
+Used in completion suggester to store shingled value of string
+
+```
+def format_field_for_suggestion(text):
+    text_list = text.split(' ')
+    l = len(text_list)
+    final_text_list = [text_list[x:l] for x in range(l)]
+    final_text = [' '.join(x).lower() for x in final_text_list]
+    return final_text
+
+print format_field_for_suggestion("an example of completion suggestor")
+['an example of completion suggestor', 'example of completion suggestor', 'of completion suggestor', 'completion suggestor', 'suggestor']
 ```
 
 ### Nodejs
@@ -75,7 +90,6 @@ function callScan(scrollId) {
     });
 
 }
-
-
-
 ```
+
+
