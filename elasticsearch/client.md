@@ -39,6 +39,47 @@ print format_field_for_suggestion("an example of completion suggestor")
 ['an example of completion suggestor', 'example of completion suggestor', 'of completion suggestor', 'completion suggestor', 'suggestor']
 ```
 
+#### Search Query
+
+```
+import json
+
+# assuming `es` client is already created
+
+query = '''{"query": {"match_all": {} }}'''
+response = es.search(index=INDEX_NAME, doc_type=TYPE_NAME, body=query)
+parsed_response = json.loads(json.dumps(res))
+```
+
+#### Count Query
+
+```
+import json
+
+# assuming `es` client is already created
+
+response = es.count(index=INDEX_NAME, doc_type=TYPE_NAME)
+parsed_response = json.loads(json.dumps(res))
+total_documents = parsed_response['count']
+```
+
+#### Termvector Query
+
+```
+import json
+
+# assuming `es` client is already created
+
+termvector_params = {
+    'index': INDEX_NAME,
+    'doc_type': TYPE_NAME,
+    'id': doc_id,
+    'routing': optional_routing_value
+}
+response = es.termvectors(**termvector_params)
+parsed_response = json.loads(json.dumps(res))
+```
+
 ### Nodejs
 
 #### Scan and scroll
