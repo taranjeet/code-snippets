@@ -245,3 +245,91 @@ class BookForm(ModelForm):
 
 
 ```
+
+#### Add choices in form init method
+
+```
+from django import forms
+
+class BookForm(forms.Form):
+
+    book_name = forms.CharField(
+        label='Book Name',
+        help_text='Specify Book Name here',
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter Book Name Here'
+        })
+    )
+
+    genre = forms.ChoiceField(
+        label='Genre',
+        help_text='Specify Genre here',
+        choices=(),
+        widget=forms.Select(attrs={
+            'class': 'select2_elements',
+            'placeholder': 'Select Genre',
+            'style': 'width : 100%'
+        })
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(BookForm, self).__init__(*args, **kwargs)
+        choices = [('', '')] + [(genre.name, genre.name) for genre in Genre.objects.all()]
+        self.fields['genre'].choices = choices
+
+```
+
+#### Create field in form init
+
+```
+from django import forms
+
+class BookForm(forms.Form):
+
+    def __init__(self, *args, **kwargs):
+        super(BookForm, self).__init__(*args, **kwargs)
+        self.fields['book_name'] = forms.CharField(
+            label='Book Name',
+            help_text='Specify Book Name here',
+            widget=forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter Book Name Here'
+            })
+        )
+
+```
+
+#### Pass custom argument when creating form instance and use that in instance
+
+```
+from django import forms
+
+
+class BookForm(forms.Form):
+
+    genre = forms.ChoiceField(
+        label='Genre',
+        help_text='Specify Genre here',
+        choices=(),
+        widget=forms.Select(attrs={
+            'class': 'select2_elements',
+            'placeholder': 'Select Genre',
+            'style': 'width : 100%'
+        })
+    )
+
+    def __init__(self, *args, **kwargs):
+        genre_category = kwargs.pop('genre_category', None)
+        if genre_category:
+            queryset = Genre.objects.filter(category__in=genre_category)
+        else:
+            queryset = Genre.objects.all()
+        choices = [('', '')] + [(genre.name, genre.name) for genre in queryset]
+        super(BookForm, self).__init__(*args, **kwargs)
+        self.fields['genre'].choices = choices
+
+
+# in views, when creating form instance, pass `genre_category`
+form_obj = BookForm(request.GET or None, genre_category=my_custom_genre_category)
+```
