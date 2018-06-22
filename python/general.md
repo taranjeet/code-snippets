@@ -57,7 +57,7 @@ from os.path import join
 import requests
 
 
-def download_image(url, file_path):
+def download_file(url, file_path):
     try:
         response = requests.get(url)
     except Exception as e:
