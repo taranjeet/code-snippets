@@ -16,7 +16,7 @@ ES_HOST_STRING = '{}:{}'.format(ES_HOST, ES_PORT)
 
 es = Elasticsearch([ES_HOST_STRING])
 query = '''{"query": {"match_all": {} }, "sort": [{"id": {"order": "asc"} } ]}'''
-response = scan(es, query=query, size=100, index=INDEX_NAME, doc_type=TYPE_NAME)
+response = scan(es, query=query, size=100, index=INDEX_NAME, doc_type=TYPE_NAME, scroll='5m')
 
 for doc in response:
     parsed_doc = json.loads(json.dumps(doc))
@@ -78,6 +78,28 @@ termvector_params = {
 }
 response = es.termvectors(**termvector_params)
 parsed_response = json.loads(json.dumps(res))
+```
+
+#### Update Query
+
+```
+import json
+
+# assuming `es` client is already created
+
+update_doc = {
+    'key1': 'newvalue1',
+    'key2': 'newvalue2'
+}
+es.update(index=INDEX_NAME,
+    doc_type=TYPE_NAME,
+    id=doc_id,
+    routing=routing,
+    body={
+        'doc': update_doc,
+        'doc_as_upsert': True
+    }
+)
 ```
 
 ### Nodejs
