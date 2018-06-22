@@ -6,6 +6,7 @@
 * [Create frequency distribution and compute unigram probability](#create-frequency-distribution-and-compute-unigram-probability)
 * [Create conditional frequency distribution and probability distribution](#create-conditional-frequency-distribution-and-probability-distribution)
 * [Generate wordcloud](#generate-wordcloud)
+* [Function to extract nouns using pos tag](#function-to-extract-nouns-using-pos-tag)
 
 #### Function to process function and get tokens
 
@@ -124,4 +125,15 @@ plt.axis("off")
 plt.show()
 ```
 
+#### Function to extract nouns using pos tag
 
+```
+def extract_nouns(tags):
+    nouns = [tag[0] for tag in tags if tag[1][:2] == 'NN']
+    return nouns
+
+text = 'I want to book a flight'
+tags = pos_tag(text.split(' '))
+nouns = extract_nouns(tags)
+# [book, flight]
+```
