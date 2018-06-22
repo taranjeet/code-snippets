@@ -49,3 +49,24 @@ def write_json_to_file(file_path, token_map):
 dict_as_list = sorted(dict_object.items(), key=lambda x: x[1], reverse=True)
 ```
 
+#### Download file from url and save to a location
+
+```
+from os.path import join
+
+import requests
+
+
+def download_image(url, file_path):
+    try:
+        response = requests.get(url)
+    except Exception as e:
+        print 'Failed to download file from {} with error as {}'.format(url, e)
+        return False
+    if response.status_code == requests.codes.ok:
+        with open(file_path, 'wb') as infile:
+            infile.write(response.content)
+        return True
+    return False
+```
+
