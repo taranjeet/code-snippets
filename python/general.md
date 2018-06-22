@@ -43,6 +43,29 @@ def write_json_to_file(file_path, token_map):
         json.dump(token_map, f)
 ```
 
+#### Read from a csv file
+
+```
+import csv
+with open(file, 'r') as infile:
+    reader = csv.reader(infile, delimiter=',')
+    for row in reader:
+        print row[0], row[1]
+```
+
+#### Write to a csv file
+
+```
+import csv
+
+numbers = range(10)
+
+with open(file, 'r') as outfile:
+    writer = csv.writer(outfile, delimiter=',')
+    for number in numbers:
+        writer.writerow([number, ])
+```
+
 #### Sort a dictionary
 
 ```
