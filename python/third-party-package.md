@@ -196,3 +196,44 @@ session.set_keyspace(CASSANDRA_KEYSPACE)
 
 session.execute('Update mykeyspace.table_name set name = 'newname' where id = %s ', (row_id,))
 ```
+
+### Mysql Client
+
+#### Insert Query example
+
+```
+import MySQLdb
+
+db = MySQLdb.connect(DB_HOST, DB_USER, DB_PASS, DB_NAME)
+cursor = db.cursor()
+
+query = 'INSERT into employee(name) VALUES (%s)'
+
+cursor.execute(query, ['employee1', ])
+db.commit()
+db.close()
+
+# with try-catch
+try:
+    cursor.execute(query, ['employee1', ])
+    db.commit()
+except Exception as e:
+    db.rollback()
+db.close()
+```
+
+#### Select Query example
+
+```
+import MySQLdb
+
+db = MySQLdb.connect(DB_HOST, DB_USER, DB_PASS, DB_NAME)
+cursor = db.cursor()
+
+query = 'Select id, age from employee where name = %s'
+
+cursor.execute(query, ['employee1', ])
+employee_1 = cursor.fetchone()
+eid, eage = employee_1
+db.close()
+```
