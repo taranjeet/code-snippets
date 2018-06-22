@@ -70,3 +70,12 @@ def download_file(url, file_path):
     return False
 ```
 
+#### Remove multiple spcae
+
+```
+import re
+
+
+def remove_multiple_space(s):
+    return re.sub('\s+', ' ', s)
+```
