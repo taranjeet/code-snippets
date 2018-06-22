@@ -141,3 +141,58 @@ except Exception as e:
     print 'Failed to create request', e
     response = None
 ```
+
+### BeautifulSoup
+
+#### Find particular tag
+
+```
+from bs4 import BeautifulSoup
+
+def find_particular_tags(s, tag):
+    soup = BeautifulSoup(s, 'html.parser')
+    return soup.select(tag)
+
+
+def find_img_tags(s):
+    soup = BeautifulSoup(s, 'html.parser')
+    img = soup.select('img')
+    return [i['src'] for i in img if i['src']]
+```
+
+### Cassandra Client
+
+#### Select Query example
+
+```
+from cassandra.cluster import Cluster
+from cassandra.auth import PlainTextAuthProvider
+
+auth_provider = PlainTextAuthProvider(
+    username=CASSANDRA_USERNAME, password=CASSANDRA_PASSWORD)
+
+cluster = Cluster(auth_provider=auth_provider)
+session = cluster.connect()
+session.set_keyspace(CASSANDRA_KEYSPACE)
+
+rows = session.execute('select * from {}.table_name'.format(CASSANDRA_KEYSPACE))
+for row in rows:
+    print row.id, row.name
+```
+
+#### Update Query example
+
+```
+from cassandra.cluster import Cluster
+from cassandra.auth import PlainTextAuthProvider
+
+auth_provider = PlainTextAuthProvider(
+    username=CASSANDRA_USERNAME, password=CASSANDRA_PASSWORD)
+
+CASSANDRA_KEYSPACE = 'mykeyspace'
+cluster = Cluster(auth_provider=auth_provider)
+session = cluster.connect()
+session.set_keyspace(CASSANDRA_KEYSPACE)
+
+session.execute('Update mykeyspace.table_name set name = 'newname' where id = %s ', (row_id,))
+```
