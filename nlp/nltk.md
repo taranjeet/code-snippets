@@ -48,7 +48,7 @@ tokens = process_text(text)
 stem_tokens = [stemmer.stem(token) for token in tokens]
 ```
 
-### Parts of Speech(POS) Tagging example
+#### Parts of Speech(POS) Tagging example
 
 ```
 from nltk.tag import pos_tag
