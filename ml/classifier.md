@@ -7,6 +7,8 @@
 ```
 # dog-cat classifier
 
+import numpy as np
+
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
 
@@ -38,6 +40,7 @@ print X_train_tf.shape      # (5, 13)
 clf = MultinomialNB().fit(X_train_tf, classes)
 
 sentences_test = ['I dont like dogs', 'cats are very cute']
+classes_test = ['dog', 'cat']
 X_test_counts = count_vect.transform(sentences_test)
 print X_test_counts.shape      # (2, 13)
 
@@ -47,4 +50,5 @@ print X_test_tfidf.shape      # (2, 13)
 predicted = clf.predict(X_test_tfidf)
 
 print predicted               # ['dog', 'dog']
+print np.mean(predicted == classes_test)    # 0.5
 ```
