@@ -25,3 +25,21 @@ POST /_aliases
     ]
 }
 ```
+
+#### Analyze api
+
+```
+POST author/_analyze
+{
+  "text": "this is a sample description about the author",
+  "analyzer": "name_of_analyzer",
+  "explain" : true
+}
+
+POST author/_analyze
+{
+  "text": "this is a sample description about the author",
+  "filter": ["name_of_any_filter"]
+}
+
+```
