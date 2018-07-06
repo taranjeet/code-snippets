@@ -79,3 +79,7 @@ cache.get('mykey')
 # delete value
 cache.delete('mykey')
 ```
+
+#### Get request middleware
+
+This is required to access request in places where it is not available like model save. Use [this](https://pypi.org/project/django-contrib-requestprovider/) package.
