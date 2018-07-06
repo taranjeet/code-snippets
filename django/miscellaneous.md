@@ -83,3 +83,24 @@ cache.delete('mykey')
 #### Get request middleware
 
 This is required to access request in places where it is not available like model save. Use [this](https://pypi.org/project/django-contrib-requestprovider/) package.
+
+#### Execute a management command from view
+
+Many a times, some operational task is required to be executed through management command and views. Views gives us the power to control various parameters.
+
+```
+import os
+import subprocess
+from os.path import join
+
+manage_py_location = join(os.getcwd(), 'manage.py')
+python_path = join(os.getcwd(), '..', 'pyenv', 'bin', 'python')
+log_file_dir = join(os.getcwd(), '..', 'logs')
+log_file_path = join(log_file_dir, 'mynewmanagementcommand.log')
+file = open(log_file_path, 'a+')
+error_log_file_path = join(log_file_dir, 'mynewmanagementcommanderror.log')
+error_file = open(error_log_file_path, 'a+')
+subprocess.Popen([python_path, manage_py_location, 'mynewmanagementcommand', argument1, argument2],
+                 env=os.environ.copy(), stdout=file, stderr=error_file)
+
+```
