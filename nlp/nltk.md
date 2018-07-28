@@ -2,6 +2,7 @@
 
 * [Function to process function and get tokens](#function-to-process-function-and-get-tokens)
 * [Stemming Example](#stemming-example)
+* [Lemmatization Example](#lemmatization-example)
 * [Parts of Speech(POS) Tagging example](#stemming-example)
 * [Create frequency distribution and compute unigram probability](#create-frequency-distribution-and-compute-unigram-probability)
 * [Create conditional frequency distribution and probability distribution](#create-conditional-frequency-distribution-and-probability-distribution)
@@ -46,6 +47,16 @@ stemmer = SnowballStemmer("english")
 
 tokens = process_text(text)
 stem_tokens = [stemmer.stem(token) for token in tokens]
+```
+
+#### Lemmatization example
+
+```
+from nltk.stem import WordNetLemmatizer
+lemmatizer = WordNetLemmatizer()
+
+tokens = process_text(text)
+lemma_tokens = [lemmatizer.lemmatize(token) for token in tokens]
 ```
 
 #### Parts of Speech(POS) Tagging example
