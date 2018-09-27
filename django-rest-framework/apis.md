@@ -7,6 +7,21 @@
 #### Using APIView
 
 ```
+# urls.py
+
+from django.urls import path
+from .views import TodoList, TodoDetail
+
+urlpatterns = [
+
+    path('todo', TodoList.as_view()),
+    path('todo/<int:pk>/', TodoDetail.as_view()),
+
+]
+```
+
+```
+# views.py
 from django.http import Http404
 
 from rest_framework.views import APIView
@@ -63,6 +78,9 @@ class TodoDetail(APIView):
 #### Using generic view
 
 ```
+# NOTE: urls remain the same as mentioned in Using APIView section.
+
+# views.py
 from rest_framework import generics
 from rest_framework.reverse import reverse
 
@@ -83,6 +101,9 @@ class TodoDetail(generics.RetrieveUpdateDestroyAPIView):
 #### Using generic view and attaching user as well
 
 ```
+# NOTE: urls remain the same as mentioned in Using APIView section.
+
+# views.py
 from rest_framework import generics
 from rest_framework.reverse import reverse
 
