@@ -15,6 +15,7 @@ toc::[]
 Use Form Mixin to include field(s) in various forms
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
+[source,python]
 ....
 from django import forms
 
@@ -59,6 +60,7 @@ Various Form field example
 
 Uses bootstrap(v4) and select2 for frontend styling.
 
+[source,python]
 ....
 from django import forms
 
@@ -150,6 +152,7 @@ class AllDjangoFieldForm(forms.Form):
 Override field and form clean method
 ++++++++++++++++++++++++++++++++++++
 
+[source,python]
 ....
 from django import forms
 
@@ -202,6 +205,7 @@ class ContactForm(forms.Form):
 Override form init method
 +++++++++++++++++++++++++
 
+[source,python]
 ....
 from django import forms
 
@@ -237,6 +241,7 @@ class BookForm(forms.Form):
 Override labels, widgets in Meta class
 ++++++++++++++++++++++++++++++++++++++
 
+[source,python]
 ....
 from django.forms import ModelForm
 
@@ -264,6 +269,7 @@ class BookForm(ModelForm):
 Add choices in form init method
 +++++++++++++++++++++++++++++++
 
+[source,python]
 ....
 from django import forms
 
@@ -298,6 +304,7 @@ class BookForm(forms.Form):
 Create field in form init
 +++++++++++++++++++++++++
 
+[source,python]
 ....
 from django import forms
 
@@ -318,6 +325,7 @@ class BookForm(forms.Form):
 Pass custom argument when creating form instance and use that in instance
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+[source,python]
 ....
 from django import forms
 
