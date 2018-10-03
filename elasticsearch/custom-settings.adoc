@@ -1,10 +1,25 @@
-## Custom Settings
+= Custom Settings
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
 
-### Analyzers
+toc::[]
 
-#### Store string as keyword analyzer
 
-```
+Analyzers
+^^^^^^^^^
+
+Store string as keyword analyzer
+++++++++++++++++++++++++++++++++
+
+[source, json]
+....
 {
   "settings": {
     "index": {
@@ -27,4 +42,4 @@
     }
   }
 }
-```
+....

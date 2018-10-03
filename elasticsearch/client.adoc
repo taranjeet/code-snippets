@@ -1,10 +1,24 @@
-## Client
+= Client
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
 
-### Python
+toc::[]
 
-#### Scan and scroll
+Python
+^^^^^^
 
-```
+Scan and scroll
++++++++++++++++
+
+[source, python]
+....
 import json
 
 from elasticsearch import Elasticsearch
@@ -21,13 +35,15 @@ response = scan(es, query=query, size=100, index=INDEX_NAME, doc_type=TYPE_NAME,
 for doc in response:
     parsed_doc = json.loads(json.dumps(doc))
     print parsed_doc.get('_id')
-```
+....
 
-#### Compute shingled value of string for Completion Suggester
+Compute shingled value of string for Completion Suggester
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Used in completion suggester to store shingled value of string
 
-```
+[source, python]
+....
 def format_field_for_suggestion(text):
     text_list = text.split(' ')
     l = len(text_list)
@@ -37,11 +53,13 @@ def format_field_for_suggestion(text):
 
 print format_field_for_suggestion("an example of completion suggestor")
 ['an example of completion suggestor', 'example of completion suggestor', 'of completion suggestor', 'completion suggestor', 'suggestor']
-```
+....
 
-#### Search Query
+Search Query
+++++++++++++
 
-```
+[source, python]
+....
 import json
 
 # assuming `es` client is already created
@@ -49,11 +67,13 @@ import json
 query = '''{"query": {"match_all": {} }}'''
 response = es.search(index=INDEX_NAME, doc_type=TYPE_NAME, body=query)
 parsed_response = json.loads(json.dumps(res))
-```
+....
 
-#### Count Query
+Count Query
++++++++++++
 
-```
+[source, python]
+....
 import json
 
 # assuming `es` client is already created
@@ -61,11 +81,13 @@ import json
 response = es.count(index=INDEX_NAME, doc_type=TYPE_NAME)
 parsed_response = json.loads(json.dumps(res))
 total_documents = parsed_response['count']
-```
+....
 
-#### Termvector Query
+Termvector Query
+++++++++++++++++
 
-```
+[source, python]
+....
 import json
 
 # assuming `es` client is already created
@@ -78,11 +100,13 @@ termvector_params = {
 }
 response = es.termvectors(**termvector_params)
 parsed_response = json.loads(json.dumps(res))
-```
+....
 
-#### Update Query
+Update Query
+++++++++++++
 
-```
+[source, python]
+....
 import json
 
 # assuming `es` client is already created
@@ -100,13 +124,16 @@ es.update(index=INDEX_NAME,
         'doc_as_upsert': True
     }
 )
-```
+....
 
-### Nodejs
+Nodejs
+^^^^^^
 
-#### Scan and scroll
+Scan and scroll
++++++++++++++++
 
-```
+[source, js]
+....
 # function which does scan and scroll
 function scanAndScroll({ limit = 100, scrollId } = {}) {
     const query = {
@@ -153,6 +180,4 @@ function callScan(scrollId) {
     });
 
 }
-```
-
-
+....
