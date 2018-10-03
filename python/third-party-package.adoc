@@ -1,10 +1,24 @@
-## Third Party Packages
+= Third Party Packages
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
 
-### Pika(rabbitmq)
+toc::[]
 
-#### Create a connection
+Pika(rabbitmq)
+^^^^^^^^^^^^^^
 
-```
+Create a connection
++++++++++++++++++++
+
+[source,python]
+....
 import pika
 
 connection_string = 'amqp://{username}:{password}@{host}?heartbeat=60'.format(
@@ -13,11 +27,13 @@ connection_string = 'amqp://{username}:{password}@{host}?heartbeat=60'.format(
 parameters = pika.connection.URLParameters(connection_string)
 connection = pika.BlockingConnection(parameters)
 channel = connection.channel()
-```
+....
 
-#### Create a exchange and queue
+Create a exchange and queue
++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 import pika
 
 connection_string = 'amqp://{username}:{password}@{host}?heartbeat=60'.format(
@@ -35,11 +51,13 @@ channel.queue_bind(exchange=EXCHANGE_NAME,
     queue=QUEUE_NAME,
     routing_key='bindingkey.*.*'
 )
-```
+....
 
-#### Publish message
+Publish message
++++++++++++++++
 
-```
+[source,python]
+....
 import json
 import pika
 
@@ -64,13 +82,16 @@ channel.basic_publish(exchange=EXCHANGE_NAME,
     body=json.dumps(message),
     properties=pika.BasicProperties(delivery_mode=2)
 )
-```
+....
 
-### Requests
+Requests
+^^^^^^^^
 
-#### Get request with queryparams
+Get request with queryparams
+++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 import json
 import requests
 
@@ -91,11 +112,13 @@ except Exception as e:
 
 if response and response.status_code == requests.codes.ok:
     print '200 status code received'
-```
+....
 
-#### Post request with request body
+Post request with request body
+++++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 import json
 import requests
 
@@ -113,11 +136,13 @@ try:
 except Exception as e:
     print 'Failed to create request', e
     response = None
-```
+....
 
-#### Generic way to do both get/post request
+Generic way to do both get/post request
++++++++++++++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 import requests
 
 post_data = {
@@ -140,13 +165,16 @@ try:
 except Exception as e:
     print 'Failed to create request', e
     response = None
-```
+....
 
-### BeautifulSoup
+BeautifulSoup
+^^^^^^^^^^^^^
 
-#### Find particular tag
+Find particular tag
++++++++++++++++++++
 
-```
+[source,python]
+....
 from bs4 import BeautifulSoup
 
 def find_particular_tags(s, tag):
@@ -158,13 +186,16 @@ def find_img_tags(s):
     soup = BeautifulSoup(s, 'html.parser')
     img = soup.select('img')
     return [i['src'] for i in img if i['src']]
-```
+....
 
-### Cassandra Client
+Cassandra Client
+^^^^^^^^^^^^^^^^
 
-#### Select Query example
+Select Query example
+++++++++++++++++++++
 
-```
+[source,python]
+....
 from cassandra.cluster import Cluster
 from cassandra.auth import PlainTextAuthProvider
 
@@ -178,11 +209,13 @@ session.set_keyspace(CASSANDRA_KEYSPACE)
 rows = session.execute('select * from {}.table_name'.format(CASSANDRA_KEYSPACE))
 for row in rows:
     print row.id, row.name
-```
+....
 
-#### Update Query example
+Update Query example
+++++++++++++++++++++
 
-```
+[source,python]
+....
 from cassandra.cluster import Cluster
 from cassandra.auth import PlainTextAuthProvider
 
@@ -195,13 +228,16 @@ session = cluster.connect()
 session.set_keyspace(CASSANDRA_KEYSPACE)
 
 session.execute('Update mykeyspace.table_name set name = 'newname' where id = %s ', (row_id,))
-```
+....
 
-### Mysql Client
+Mysql Client
+^^^^^^^^^^^^
 
-#### Insert Query example
+Insert Query example
+++++++++++++++++++++
 
-```
+[source,python]
+....
 import MySQLdb
 
 db = MySQLdb.connect(DB_HOST, DB_USER, DB_PASS, DB_NAME)
@@ -220,11 +256,13 @@ try:
 except Exception as e:
     db.rollback()
 db.close()
-```
+....
 
-#### Select Query example
+Select Query example
+++++++++++++++++++++
 
-```
+[source,python]
+....
 import MySQLdb
 
 db = MySQLdb.connect(DB_HOST, DB_USER, DB_PASS, DB_NAME)
@@ -236,4 +274,4 @@ cursor.execute(query, ['employee1', ])
 employee_1 = cursor.fetchone()
 eid, eage = employee_1
 db.close()
-```
+....

@@ -1,9 +1,21 @@
-## Python General Code
+= Python General Code
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
 
+toc::[]
 
-#### Remove html tags from string
+Remove html tags from string
+++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 from HTMLParser import HTMLParser
 
 class MLStripper(HTMLParser):
@@ -24,38 +36,45 @@ def strip_tags(html):
     return s.get_data()
 
 # now use strip_tags to remove html tags from string
+....
 
-```
+Read from json file
++++++++++++++++++++
 
-#### Read from json file
-
-```
+[source,python]
+....
 def read_json_from_file(file_path):
     with open(file_path, 'r') as infile:
         return json.load(infile)
-```
+....
 
-#### Write to json file
+Write to json file
+++++++++++++++++++
 
-```
+[source,python]
+....
 def write_json_to_file(file_path, token_map):
     with open(file_path, 'w') as f:
         json.dump(token_map, f)
-```
+....
 
-#### Read from a csv file
+Read from a csv file
+++++++++++++++++++++
 
-```
+[source,python]
+....
 import csv
 with open(file, 'r') as infile:
     reader = csv.reader(infile, delimiter=',')
     for row in reader:
         print row[0], row[1]
-```
+....
 
-#### Write to a csv file
+Write to a csv file
++++++++++++++++++++
 
-```
+[source,python]
+....
 import csv
 
 numbers = range(10)
@@ -64,17 +83,21 @@ with open(file, 'r') as outfile:
     writer = csv.writer(outfile, delimiter=',')
     for number in numbers:
         writer.writerow([number, ])
-```
+....
 
-#### Sort a dictionary
+Sort a dictionary
++++++++++++++++++
 
-```
+[source,python]
+....
 dict_as_list = sorted(dict_object.items(), key=lambda x: x[1], reverse=True)
-```
+....
 
-#### Download file from url and save to a location
+Download file from url and save to a location
++++++++++++++++++++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 from os.path import join
 
 import requests
@@ -91,21 +114,25 @@ def download_file(url, file_path):
             infile.write(response.content)
         return True
     return False
-```
+....
 
-#### Remove multiple spcae
+Remove multiple space
++++++++++++++++++++++
 
-```
+[source,python]
+....
 import re
 
 
 def remove_multiple_space(s):
     return re.sub('\s+', ' ', s)
-```
+....
 
-#### Timeout a particular function
+Timeout a particular function
++++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 import functools
 import multiprocessing.pool
 
@@ -128,4 +155,4 @@ def timeout(max_timeout):
 @timeout(2)
 def my_function():
     print 'Function which requires timeout'
-```
+....
