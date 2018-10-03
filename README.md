@@ -20,7 +20,7 @@ Since the code is already taken from public sources, and various Github reposito
 
 - [Bash](bash/README.md)
 - [Django](django/README.md)
-- [Django Rst Framework](django-rest-framework/README.md)
+- [Django Rest Framework](django-rest-framework/README.md)
 - [Elasticsearch](elasticsearch/README.md)
 - [Installations](installations/README.md)
 - [Ml](ml/README.md)
