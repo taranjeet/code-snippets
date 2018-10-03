@@ -17,6 +17,7 @@ Imagemagick
 Reduce Image size
 +++++++++++++++++
 
+[source,bash]
 ....
 magick convert image.jpg -resize 50% image_reduce.jpg
 ....
