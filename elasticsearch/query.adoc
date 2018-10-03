@@ -1,8 +1,22 @@
-## Queries
+= Queries
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
 
-#### Completion Suggester: Suggest Query
+toc::[]
 
-```
+
+Completion Suggester: Suggest Query
++++++++++++++++++++++++++++++++++++
+
+[source, json]
+....
 {
   "author-suggest": {
     "prefix": "query here",
@@ -11,11 +25,13 @@
     }
   }
 }
-```
+....
 
-#### Completion Suggester: Suggest Query with Context
+Completion Suggester: Suggest Query with Context
+++++++++++++++++++++++++++++++++++++++++++++++++
 
-```
+[source, json]
+....
 {
   "author-suggest": {
     "prefix": "query here",
@@ -27,11 +43,13 @@
     }
   }
 }
-```
+....
 
-#### Fuzzy query
+Fuzzy query
++++++++++++
 
-```
+[source, json]
+....
 {
   "query": {
     "match": {
@@ -43,4 +61,4 @@
     }
   }
 }
-```
+....

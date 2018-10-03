@@ -1,8 +1,21 @@
-## Api
+= Api
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
 
-#### Reindex Api
+toc::[]
 
-```
+Reindex Api
++++++++++++
+
+[source, bash]
+....
 POST _reindex
 {
   "source": {
@@ -12,11 +25,13 @@ POST _reindex
     "index": "author_v2"
   }
 }
-```
+....
 
-#### Add/Remove alias
+Add/Remove alias
+++++++++++++++++
 
-```
+[source, bash]
+....
 POST /_aliases
 {
     "actions" : [
@@ -24,11 +39,13 @@ POST /_aliases
         { "add" : { "index" : "author_v2", "alias" : "author" } }
     ]
 }
-```
+....
 
-#### Analyze api
+Analyze api
++++++++++++
 
-```
+[source, bash]
+....
 POST author/_analyze
 {
   "text": "this is a sample description about the author",
@@ -41,5 +58,4 @@ POST author/_analyze
   "text": "this is a sample description about the author",
   "filter": ["name_of_any_filter"]
 }
-
-```
+....

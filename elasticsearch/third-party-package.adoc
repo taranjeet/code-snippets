@@ -1,0 +1,42 @@
+= Third Party Package
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
+
+toc::[]
+
+Elasticdump
+^^^^^^^^^^^
+
+A https://www.npmjs.com/package/elasticdump[npm package] to take and
+load dump of documents into elasticsearch
+
+Take Dump
++++++++++
+
+[source, bash]
+....
+elasticdump --input=http://127.0.0.1:9200/author --output=author.json --type=data
+....
+
+Take Dump with Query
+++++++++++++++++++++
+
+[source, bash]
+....
+elasticdump --input=http://127.0.0.1:9200/author --output=author.json --type=data --searchBody '{"query": {"bool": {"filter": {"term": {"authorname": "AUTHOR_NAME_HERE"} } } } }'
+....
+
+Load Dump
++++++++++
+
+[source, bash]
+....
+elasticdump --input=author.json --output=http://127.0.0.1:9200/author --type=data
+....
