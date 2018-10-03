@@ -7,7 +7,7 @@
 :sectnums:
 :toc: macro
 :toclevels: 1
-:toc-title: Table of Contents
+:toc-title:
 
 toc::[]
 
