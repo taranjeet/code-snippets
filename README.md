@@ -1,1 +1,17 @@
 # code-snippets
+
+This is a collection of some important/tricky/easy/common/frequently used snippets in various languages.
+
+## What problem does it solves?
+
+Many times, I need to bookmark some link, or save a StackOverflow or look into some codebase. I realized this repo, mainly because of the two reasons
+
+* Sometimes the time spent to figure out a way to do X thing was actually more than the time involved in implementing that solution
+
+* I had no repository of how I approached a problem(sometimes tricky) in the past.
+
+This repository now acts as a central place for all the codebase that I keep on writing so that future lookups become easy.
+
+## Why a repo?
+
+Since the code is already taken from public sources, and various Github repositories, I figured that a repository in the open (Github public repository) will actually act as a gratitude to all the various sources that I have taken help from. Plus it benefits other, who are looking to solve a particular problem.
