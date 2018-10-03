@@ -1,12 +1,25 @@
-## Django views
+= Django views
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
 
+toc::[]
 
-#### Override get and post method in ListView
+Override get and post method in ListView
+++++++++++++++++++++++++++++++++++++++++
 
-Generally used when some custom object(from other database like elasticsearch) needs
-to be displayed in a list form which can be paginated.
+Generally used when some custom object(from other database like
+elasticsearch) needs to be displayed in a list form which can be
+paginated.
 
-```
+[source,python]
+....
 from django.shortcuts import render
 from django.views.generic import ListView
 
@@ -31,12 +44,13 @@ class BookListView(ListView):
         return render(request, self.template_name, {
             'form': form,
         })
-```
+....
 
-#### Override get with pagination in ListView
+Override get with pagination in ListView
+++++++++++++++++++++++++++++++++++++++++
 
-
-```
+[source,python]
+....
 from django.shortcuts import render
 from django.views.generic import ListView
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -63,13 +77,16 @@ class BookListView(ListView):
             'form': form,
             'books': books
         })
-```
+....
 
-#### Override dispatch in Class based View
+Override dispatch in Class based View
++++++++++++++++++++++++++++++++++++++
 
-`dispatch` function in any Class based View can be overriden to check for any custom permission or if the user is logged in or not.
+`dispatch` function in any Class based View can be overriden to check
+for any custom permission or if the user is logged in or not.
 
-```
+[source,python]
+....
 from django.shortcuts import render
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
@@ -86,11 +103,13 @@ class BookListView(ListView):
         if not self.request.user.has_perm('base.CAN_ACCESS_BOOK_LIST'):
             raise Http404
         return super(BookListView, self).dispatch(*args, **kwargs)
-```
+....
 
-#### Pass initial data in forms
+Pass initial data in forms
+++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 from django.shortcuts import render
 from django.views.generic import ListView
 
@@ -110,13 +129,17 @@ class BookListView(ListView):
         return render(request, self.template_name, {
             'form': form
         })
-```
+....
 
-#### View which functions on both ajax and normal request
+View which functions on both ajax and normal request
+++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Many a times, it is required to render the template at get request and then render a particular json object when an ajax request is made at the same route.
+Many a times, it is required to render the template at get request and
+then render a particular json object when an ajax request is made at the
+same route.
 
-```
+[source,python]
+....
 from django.shortcuts import render
 from django.views.generic import ListView
 from django.http import JsonResponse
@@ -142,11 +165,13 @@ class BookListView(ListView):
             return render(request, self.template_name, output)
         else:
             return JsonResponse(output)
-```
+....
 
-#### Message framework use in views
+Message framework use in views
+++++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 from django.shortcuts import render
 from django.views.generic import ListView
 
@@ -168,15 +193,17 @@ class BookListView(ListView):
         return render(request, self.template_name, {
             'form': form
         })
-```
+....
 
-#### Apply login_required decorator and permission check on FBV
+Apply login_required decorator and permission check on FBV
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 from django.contrib.auth.decorators import login_required, permission_required
 
 @login_required
 @permission_required('myapp.MY_PERMISSION', raise_exception=True)
 def my_view(request):
     return HttpResponse('<h1>Hello</h1>')
-```
+....
