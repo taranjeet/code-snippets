@@ -1,10 +1,22 @@
-## Classifier
+= Classifier
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
 
-* [Multinomial Naive Bayes Classification](#multinomial-naive-bayes-classification)
+toc::[]
 
-#### Multinomial Naive Bayes Classification
 
-```
+Multinomial Naive Bayes Classification
+++++++++++++++++++++++++++++++++++++++
+
+[source,python]
+....
 # dog-cat classifier
 
 import numpy as np
@@ -51,4 +63,4 @@ predicted = clf.predict(X_test_tfidf)
 
 print predicted               # ['dog', 'dog']
 print np.mean(predicted == classes_test)    # 0.5
-```
+....

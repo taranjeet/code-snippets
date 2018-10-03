@@ -1,0 +1,23 @@
+= Third Party Package
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
+
+toc::[]
+
+Imagemagick
+^^^^^^^^^^^
+
+Reduce Image size
++++++++++++++++++
+
+[source,bash]
+....
+magick convert image.jpg -resize 50% image_reduce.jpg
+....

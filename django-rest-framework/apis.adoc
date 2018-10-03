@@ -1,12 +1,21 @@
-## Apis
+= Apis
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
 
-* [Using APIView](#using-apiview)
-* [Using generic view](#using-generic-view)
-* [Using generic view and attaching user as well](#using-generic-view-and-attaching-user-as-well)
+toc::[]
 
-#### Using APIView
+Using APIView
++++++++++++++
 
-```
+[source,python]
+....
 # urls.py
 
 from django.urls import path
@@ -18,9 +27,10 @@ urlpatterns = [
     path('todo/<int:pk>/', TodoDetail.as_view()),
 
 ]
-```
+....
 
-```
+[source,python]
+....
 # views.py
 from django.http import Http404
 
@@ -72,12 +82,13 @@ class TodoDetail(APIView):
         todo = self.get_object(pk)
         todo.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-```
+....
 
+Using generic view
+++++++++++++++++++
 
-#### Using generic view
-
-```
+[source,python]
+....
 # NOTE: urls remain the same as mentioned in Using APIView section.
 
 # views.py
@@ -96,11 +107,13 @@ class TodoList(generics.ListCreateAPIView):
 class TodoDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TodoSerializer
     queryset = Todo.objects.all()
-```
+....
 
-#### Using generic view and attaching user as well
+Using generic view and attaching user as well
++++++++++++++++++++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 # NOTE: urls remain the same as mentioned in Using APIView section.
 
 # views.py
@@ -123,4 +136,4 @@ class TodoDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Todo.objects.all().filter(user=self.request.user)
-```
+....
