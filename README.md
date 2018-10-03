@@ -15,3 +15,14 @@ This repository now acts as a central place for all the codebase that I keep on 
 ## Why a repo?
 
 Since the code is already taken from public sources, and various Github repositories, I figured that a repository in the open (Github public repository) will actually act as a gratitude to all the various sources that I have taken help from. Plus it benefits other, who are looking to solve a particular problem.
+
+## Table of Contents
+
+- [Bash](bash/README.md)
+- [Django](django/README.md)
+- [Django Rst Framework](django-rest-framework/README.md)
+- [Elasticsearch](elasticsearch/README.md)
+- [Installations](installations/README.md)
+- [Ml](ml/README.md)
+- [Nlp](nlp/README.md)
+- [Python](python/README.md)
