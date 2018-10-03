@@ -1,19 +1,24 @@
-## Nltk
+= Nltk
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
 
-* [Function to process function and get tokens](#function-to-process-function-and-get-tokens)
-* [Stemming Example](#stemming-example)
-* [Lemmatization Example](#lemmatization-example)
-* [Parts of Speech(POS) Tagging example](#stemming-example)
-* [Create frequency distribution and compute unigram probability](#create-frequency-distribution-and-compute-unigram-probability)
-* [Create conditional frequency distribution and probability distribution](#create-conditional-frequency-distribution-and-probability-distribution)
-* [Generate wordcloud](#generate-wordcloud)
-* [Function to extract nouns using pos tag](#function-to-extract-nouns-using-pos-tag)
+toc::[]
 
-#### Function to process function and get tokens
+Function to process function and get tokens
++++++++++++++++++++++++++++++++++++++++++++
 
-This functions converts text to sentences first, then creates token and remove the stop words (if required)
+This functions converts text to sentences first, then creates token and
+remove the stop words (if required)
 
-```
+[source,python]
+....
 import nltk
 from nltk.corpus import stopwords
 
@@ -29,11 +34,13 @@ def process_text(text, remove_stopwords=False):
             ttokens = [token for token in ttokens if not token in english_stopwords]
         tokens += ttokens
     return tokens
-```
+....
 
-#### Stemming example
+Stemming example
+++++++++++++++++
 
-```
+[source,python]
+....
 # Porter Stemmer: commonly used
 from nltk.stem.porter import *
 stemmer = PorterStemmer()
@@ -47,29 +54,35 @@ stemmer = SnowballStemmer("english")
 
 tokens = process_text(text)
 stem_tokens = [stemmer.stem(token) for token in tokens]
-```
+....
 
-#### Lemmatization example
+Lemmatization example
++++++++++++++++++++++
 
-```
+[source,python]
+....
 from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 
 tokens = process_text(text)
 lemma_tokens = [lemmatizer.lemmatize(token) for token in tokens]
-```
+....
 
-#### Parts of Speech(POS) Tagging example
+Parts of Speech(POS) Tagging example
+++++++++++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 from nltk.tag import pos_tag
 
 tags = pos_tag(tokens)
-```
+....
 
-#### Create frequency distribution and compute unigram probability
+Create frequency distribution and compute unigram probability
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 from nltk import FreqDist
 
 text = 'this is a sample text for demonstration purpose'
@@ -85,11 +98,13 @@ def unigram_prob(word):
 
 print unigram_prob('sample')
 # 0.125
-```
+....
 
-#### Create conditional frequency distribution and probability distribution
+Create conditional frequency distribution and probability distribution
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 from nltk import ConditionalFreqDist, MLEProbDist, bigrams
 
 text = 'this is a sample text for demonstration purpose'
@@ -118,12 +133,13 @@ print cpd['sample'].samples()
 
 print cpd['sample'].generate()
 # text
+....
 
-```
+Generate wordcloud
+++++++++++++++++++
 
-#### Generate wordcloud
-
-```
+[source,python]
+....
 # pip install wordcloud
 
 from wordcloud import WordCloud
@@ -134,11 +150,13 @@ wordcloud = WordCloud().generate(' '.join(tokens))
 plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis("off")
 plt.show()
-```
+....
 
-#### Function to extract nouns using pos tag
+Function to extract nouns using pos tag
++++++++++++++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 def extract_nouns(tags):
     nouns = [tag[0] for tag in tags if tag[1][:2] == 'NN']
     return nouns
@@ -147,4 +165,4 @@ text = 'I want to book a flight'
 tags = pos_tag(text.split(' '))
 nouns = extract_nouns(tags)
 # [book, flight]
-```
+....
