@@ -6,7 +6,7 @@
 :sectnumlevels: 6
 :sectnums:
 :toc: macro
-:toclevels: 1
+:toclevels: 10
 :toc-title:
 
 toc::[]
