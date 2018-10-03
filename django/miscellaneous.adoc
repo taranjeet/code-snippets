@@ -1,8 +1,22 @@
-## Miscellaneous
+= Miscellaneous
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
 
-#### Write a management command
+toc::[]
 
-```
+
+Write a management command
+++++++++++++++++++++++++++
+
+[source,bash]
+....
 # in any app, create the following structure
 
 ├── management
@@ -10,10 +24,10 @@
 │   └── commands
 │       ├── __init__.py
 │       └── mynewmanagementcommand.py
+....
 
-```
-
-```
+[source,python]
+....
 # mynewmanagementcommand.py
 
 from django.core.management.base import BaseCommand, CommandError
@@ -39,11 +53,13 @@ class Command(BaseCommand):
             raise CommandError("Option `--argument_1... --argument_2...` must be specified.")
 
         # do some processing here now
-```
+....
 
-#### Write a custom context processor
+Write a custom context processor
+++++++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 
 def get_some_custom_value(request):
     return {
@@ -64,12 +80,13 @@ TEMPLATES = [
         },
     },
 ]
+....
 
-```
+Cache operations
+++++++++++++++++
 
-#### Cache operations
-
-```
+[source,python]
+....
 from django.core import cache
 
 # set mykey: myvalue
@@ -78,17 +95,24 @@ cache.set('mykey', 'myvalue')
 cache.get('mykey')
 # delete value
 cache.delete('mykey')
-```
+....
 
-#### Get request middleware
+Get request middleware
+++++++++++++++++++++++
 
-This is required to access request in places where it is not available like model save. Use [this](https://pypi.org/project/django-contrib-requestprovider/) package.
+This is required to access request in places where it is not available
+like model save. Use
+https://pypi.org/project/django-contrib-requestprovider/[this] package.
 
-#### Execute a management command from view
+Execute a management command from view
+++++++++++++++++++++++++++++++++++++++
 
-Many a times, some operational task is required to be executed through management command and views. Views gives us the power to control various parameters.
+Many a times, some operational task is required to be executed through
+management command and views. Views gives us the power to control
+various parameters.
 
-```
+[source,python]
+....
 import os
 import subprocess
 from os.path import join
@@ -102,5 +126,4 @@ error_log_file_path = join(log_file_dir, 'mynewmanagementcommanderror.log')
 error_file = open(error_log_file_path, 'a+')
 subprocess.Popen([python_path, manage_py_location, 'mynewmanagementcommand', argument1, argument2],
                  env=os.environ.copy(), stdout=file, stderr=error_file)
-
-```
+....

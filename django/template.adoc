@@ -1,11 +1,23 @@
-## Django templates
+= Django templates
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
 
+toc::[]
 
-#### Iterate over form in template in generic way
+Iterate over form in template in generic way
+++++++++++++++++++++++++++++++++++++++++++++
 
 Uses django-widget-tweak to add bootstrap(v4) classes.
 
-```
+[source,html]
+....
 {% load widget_tweaks %}
 
 <form method="post" enctype="multipart/form-data">
@@ -28,11 +40,13 @@ Uses django-widget-tweak to add bootstrap(v4) classes.
 {% endfor %}
 <button type="submit" class="btn btn-primary ml-auto">Submit</button>
 </form>
-```
+....
 
-#### Iterate messages in template
+Iterate messages in template
+++++++++++++++++++++++++++++
 
-```
+[source,html]
+....
 # message.html
 {% for message in messages %}
 <div class="alert {% if message.tags %} {% if message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %}{% endif %} alert-dismissible" role="alert">
@@ -40,19 +54,22 @@ Uses django-widget-tweak to add bootstrap(v4) classes.
     {{message}}
 </div>
 {% endfor %}
-```
+....
 
-#### Write a template tag
+Write a template tag
+++++++++++++++++++++
 
-```
+[source,bash]
+....
 # in any app, create the following structure
 
 ├── templatetags
 │   ├── __init__.py
 │   └── app_extras.py
-```
+....
 
-```
+[source,python]
+....
 # app_extras.py
 
 from django import template
@@ -66,14 +83,13 @@ def cut(dict_obj, key):
         return dict_obj.get(key, {})
     else:
         return dict_obj
+....
 
-```
-
-```
+[source,html]
+....
 # app_template.html
 
 {% load app_extras %}
 
 {{my_dict_object|lookup:"custom_key"}}
-
-```
+....

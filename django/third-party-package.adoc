@@ -1,10 +1,24 @@
-## Third Party Package
+= Third Party Package
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
 
-### Django Allauth
+toc::[]
 
-#### Use pre_social_login signal to allow emails of only specific domain to sign in
+Django Allauth
+^^^^^^^^^^^^^^
 
-```
+Use pre_social_login signal to allow emails of only specific domain to sign in
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+[source,python]
+....
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -39,4 +53,4 @@ class LoginAdapter(DefaultSocialAccountAdapter):
 
 # in project settings
 SOCIALACCOUNT_ADAPTER = 'path.to.LoginAdapter'
-```
+....

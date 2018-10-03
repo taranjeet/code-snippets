@@ -1,9 +1,21 @@
-## Django admin
+= Django admin
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
 
+toc::[]
 
-#### Create a custom admin action
+Create a custom admin action
+++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 from django.contrib import admin, messages
 
 from .models import Book
@@ -19,12 +31,13 @@ class BookAdmin(admin.ModelAdmin):
     mark_book_as_publishe.short_description = 'Mark Book as published'
 
     actions = [mark_book_as_published, ]
+....
 
-```
+Write a custom field for display in Django admin
+++++++++++++++++++++++++++++++++++++++++++++++++
 
-#### Write a custom field for display in Django admin
-
-```
+[source,python]
+....
 from django.contrib import admin, messages
 
 from .models import Book
@@ -40,5 +53,4 @@ class BookAdmin(admin.ModelAdmin):
             return mark_safe('<img src="{}" width="250" height="250"/>'.format(obj.image))
         return ''
     formatted_image.short_description = 'Image'
-```
-
+....

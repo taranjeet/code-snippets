@@ -1,9 +1,21 @@
-## Django models
+= Django models
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 10
+:toc-title:
 
+toc::[]
 
-#### Override model save
+Override model save
++++++++++++++++++++
 
-```
+[source,python]
+....
 from django.db import models
 
 
@@ -19,11 +31,13 @@ class Author(models.Model):
     def save(self, *args, **kwargs):
         self.full_name = '{} {}'.format(self.first_name, self.last_name)
         super(Book).save(*args, **kwargs)
-```
+....
 
-#### Create a new model property
+Create a new model property
++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 from django.db import models
 
 
@@ -37,11 +51,13 @@ class Author(models.Model):
 
     def get_full_name(self):
         return '{} {}'.format(self.first_name, self.last_name)
-```
+....
 
-#### Create a new cached property in model
+Create a new cached property in model
++++++++++++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 from django.db import models
 from django.utils.functional import cached_property
 
@@ -57,15 +73,17 @@ class Author(models.Model):
     @cached_property
     def get_full_name(self):
         return '{} {}'.format(self.first_name, self.last_name)
-```
+....
 
-#### Use transaction.atomic to save model instance
+Use transaction.atomic to save model instance
++++++++++++++++++++++++++++++++++++++++++++++
 
-```
+[source,python]
+....
 from django.db import transaction
 
 
 with transaction.atomic():
     book = Book(name='Introduction to Python')
     book.save()
-```
+....
