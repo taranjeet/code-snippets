@@ -275,3 +275,33 @@ employee_1 = cursor.fetchone()
 eid, eage = employee_1
 db.close()
 ....
+
+Insert On Duplicate Key Update example
+++++++++++++++++++++++++++++++++++++++
+
+[source,python]
+....
+import MySQLdb
+
+db = MySQLdb.connect(DB_HOST, DB_USER, DB_PASS, DB_NAME)
+cursor = db.cursor()
+
+query = """
+    INSERT INTO employee
+        (employee_id, employee_name, salary, experience)
+    VALUES
+        (%(employee_id)s, %(employee_id)s, %(salary)s, %(experience)s)
+    ON DUPLICATE KEY UPDATE
+        salarty=VALUES(salary),
+        experience=VALUES(experience);
+"""
+
+employee_data = [
+    { "employee_id": 1, "employee_name": "ABC", "salary": 10, "experience": 1},
+    { "employee_id": 2, "employee_name": "DEF", "salary": 11, "experience": 2},
+]
+
+cursor.execute(query, employee_data)
+db.commit()
+db.close()
+....
