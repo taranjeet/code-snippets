@@ -4,11 +4,11 @@ This is a collection of some important/tricky/easy/common/frequently used snippe
 
 ## What problem does it solves?
 
-Many times, I need to bookmark some link, or save a StackOverflow or look into some codebase. I realized this repo, mainly because of the two reasons
+Many times, I need to bookmark some link(and then later on search), or save a StackOverflow answer or look into some codebase. I realized this can be created as a repo, mainly because of the two reasons
 
-* Sometimes the time spent to figure out a way to do X thing was actually more than the time involved in implementing that solution
+* Sometimes the time spent to figure out a way to do a particular thing is actually more than the time involved in implementing it.
 
-* I had no repository of how I approached a problem(sometimes tricky) in the past.
+* I do not maintain any documentation of how I approached a problem(sometimes tricky) in the past.
 
 This repository now acts as a central place for all the codebase that I keep on writing so that future lookups become easy.
 
