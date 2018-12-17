@@ -66,7 +66,7 @@ import json
 
 query = '''{"query": {"match_all": {} }}'''
 response = es.search(index=INDEX_NAME, doc_type=TYPE_NAME, body=query)
-parsed_response = json.loads(json.dumps(res))
+parsed_response = json.loads(json.dumps(response))
 ....
 
 Count Query
@@ -79,7 +79,7 @@ import json
 # assuming `es` client is already created
 
 response = es.count(index=INDEX_NAME, doc_type=TYPE_NAME)
-parsed_response = json.loads(json.dumps(res))
+parsed_response = json.loads(json.dumps(response))
 total_documents = parsed_response['count']
 ....
 
@@ -99,7 +99,7 @@ termvector_params = {
     'routing': optional_routing_value
 }
 response = es.termvectors(**termvector_params)
-parsed_response = json.loads(json.dumps(res))
+parsed_response = json.loads(json.dumps(response))
 ....
 
 Update Query
