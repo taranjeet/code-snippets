@@ -28,7 +28,7 @@ class BookAdmin(admin.ModelAdmin):
         if queryset.count() == 0:
             return messages.error(request, 'Select atleast one entry')
         queryset.update(is_published=True)
-    mark_book_as_publishe.short_description = 'Mark Book as published'
+    mark_book_as_published.short_description = 'Mark Book as published'
 
     actions = [mark_book_as_published, ]
 ....
