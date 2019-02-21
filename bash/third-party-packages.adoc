@@ -23,7 +23,7 @@ magick convert image.jpg -resize 50% image_reduce.jpg
 ....
 
 Reduce Image size in folder
-+++++++++++++++++
++++++++++++++++++++++++++++
 
 [source,bash]
 ....
