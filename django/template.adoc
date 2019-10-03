@@ -112,7 +112,7 @@ Using bootstrap classes to display a choice field as inline (in horizontal)
 ....
 
 Print bootstrap like rows
-+++++++++++++++++++++++++++++
++++++++++++++++++++++++++
 
 Displays a grid like structure based on Bootstrap grid system. This is 2 column based.
 
