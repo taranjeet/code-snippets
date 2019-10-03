@@ -95,7 +95,7 @@ def cut(dict_obj, key):
 ....
 
 Render Choice Field as Inline
-++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++
 
 Using bootstrap classes to display a choice field as inline (in horizontal)
 
