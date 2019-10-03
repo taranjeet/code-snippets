@@ -93,3 +93,20 @@ def cut(dict_obj, key):
 
 {{my_dict_object|lookup:"custom_key"}}
 ....
+
+Render Choice Field as Inline
+++++++++++++++++++++++++++++++++++++++++++++
+
+Using bootstrap classes to display a choice field as inline (in horizontal)
+
+[source,html]
+....
+<div class="form-group">
+    <label class="form-control-label" for="{{ form.some_choice_field.id_for_label }}">{{ form.some_choice_field.label }}</label>
+    {% for choice in form.some_choice_field %}
+    <div class="custom-control custom-radio mb-3">
+        {{ choice}}
+    </div>
+    {% endfor %}
+</div>
+....
