@@ -128,8 +128,8 @@ subprocess.Popen([python_path, manage_py_location, 'mynewmanagementcommand', arg
                  env=os.environ.copy(), stdout=file, stderr=error_file)
 ....
 
-Load Fixture using dumpdata
-+++++++++++++++++++++++++++
+Create Fixture using dumpdata
++++++++++++++++++++++++++++++
 
 [source,bash]
 ....
@@ -137,8 +137,8 @@ python manage.py dumpdata name_of_app --format json --indent 2
 ....
 
 
-Create Fixture using loaddata
-+++++++++++++++++++++++++++++
+Load Fixture using loaddata
++++++++++++++++++++++++++++
 
 [source,bash]
 ....
