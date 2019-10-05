@@ -127,3 +127,21 @@ Displays a grid like structure based on Bootstrap grid system. This is 2 column 
     {% endfor %}
 </div>
 ....
+
+Add active class on the basis of current url
+++++++++++++++++++++++++++++++++++++++++++++
+
+Adds an active class depending upon the current url. Uses bootstrap navbar code.
+
+[source,html]
+....
+<div class="form-group">
+    <label class="form-control-label" for="{{ form.some_choice_field.id_for_label }}">{{ form.some_choice_field.label }}</label>
+    {% for choice in form.some_choice_field %}
+    <div class="custom-control custom-radio mb-3">
+        {{ choice}}
+    </div>
+    {% endfor %}
+</div>
+....
+
