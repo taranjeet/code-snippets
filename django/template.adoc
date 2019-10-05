@@ -138,3 +138,16 @@ Adds an active class depending upon the current url. Uses bootstrap navbar code.
 <a class="dropdown-item {% if request.resolver_match.url_name in 'book-list' %} active {% endif %}" href="{% url 'book-list' %}">Book List</a>
 ....
 
+Display Form field in template
+++++++++++++++++++++++++++++++
+
+[source,html]
+....
+<div class="card-body">
+    <div class="form-group">
+        <label for="{{form.author.auto_id}}">{{form.author.label}}</label>
+        {{form.author}}
+    </div>
+</div>
+....
+
