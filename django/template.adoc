@@ -135,13 +135,6 @@ Adds an active class depending upon the current url. Uses bootstrap navbar code.
 
 [source,html]
 ....
-<div class="form-group">
-    <label class="form-control-label" for="{{ form.some_choice_field.id_for_label }}">{{ form.some_choice_field.label }}</label>
-    {% for choice in form.some_choice_field %}
-    <div class="custom-control custom-radio mb-3">
-        {{ choice}}
-    </div>
-    {% endfor %}
-</div>
+<a class="dropdown-item {% if request.resolver_match.url_name in 'book-list' %} active {% endif %}" href="{% url 'book-list' %}">Book List</a>
 ....
 
