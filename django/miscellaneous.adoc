@@ -127,3 +127,20 @@ error_file = open(error_log_file_path, 'a+')
 subprocess.Popen([python_path, manage_py_location, 'mynewmanagementcommand', argument1, argument2],
                  env=os.environ.copy(), stdout=file, stderr=error_file)
 ....
+
+Load Fixture using dumpdata
++++++++++++++++++++++++++++
+
+[source,bash]
+....
+python manage.py dumpdata name_of_app --format json --indent 2
+....
+
+
+Create Fixture using loaddata
++++++++++++++++++++++++++++++
+
+[source,bash]
+....
+python manage.py loaddata path/to/fixtures.json
+....
